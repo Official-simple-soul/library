@@ -1,6 +1,6 @@
 {
   "name": "@msflib/react",
-  "version": "0.0.1",
+  "version": "0.0.2-alpha1",
   "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -63,11 +63,8 @@
   },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
-  "file": [
+  "files": [
     "dist"
   ],
-  "types": "dist/index.d.ts",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/msflib/react"
-  }
+  "types": "dist/index.d.ts"
 }
