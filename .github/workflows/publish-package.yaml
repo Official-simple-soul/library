@@ -8,19 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "18.x"
-      - run: npm ci
-      - run: npm test
-        name: Bundle with rollup
-      - run: npm run rollup
-
-  publish-gpr:
-    needs: build
-    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
@@ -31,6 +18,9 @@ jobs:
           node-version: "18.x"
           registry-url: https://npm.pkg.github.com/
       - run: npm ci
+      - run: npm test
+        name: Bundle with rollup
+      - run: npm run rollup
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
