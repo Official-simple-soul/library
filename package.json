@@ -3,6 +3,7 @@
   "version": "0.0.2-alpha1",
   "private": false,
   "dependencies": {
+    "@mui/lab": "^5.0.0-alpha.170",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -43,6 +44,10 @@
     ]
   },
   "devDependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.15.15",
+    "@mui/material": "^5.15.15",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.5",
@@ -53,7 +58,8 @@
     "rollup": "^4.5.0",
     "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "tailwindcss": "^3.3.5"
+    "tailwindcss": "^3.3.5",
+    "react-hook-form": "^7.51.2"
   },
   "peerDependencies": {
     "@types/react": "^18.2.37",
