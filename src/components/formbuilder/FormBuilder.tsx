@@ -42,6 +42,7 @@ interface FormBuilderProps {
   onSubmit: (data: any) => void;
   loadingState: boolean;
   formData: any;
+  setFormData: any;
 }
 
 const FormBuilder: React.FC<FormBuilderProps> = ({
@@ -49,11 +50,17 @@ const FormBuilder: React.FC<FormBuilderProps> = ({
   onSubmit,
   loadingState,
   formData,
+  setFormData,
 }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const { control, handleSubmit, reset } = useForm({
+  const { control, handleSubmit, reset, watch } = useForm({
     defaultValues: formData,
   });
+
+  React.useEffect(() => {
+    const subscription = watch((value) => setFormData(value));
+    return () => subscription.unsubscribe();
+  }, [watch]);
 
   const handleFormSubmit = async (data: any) => {
     try {
