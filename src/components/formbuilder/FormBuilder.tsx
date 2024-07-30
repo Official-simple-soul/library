@@ -42,7 +42,7 @@ interface FormBuilderProps {
   onSubmit: (data: any) => void;
   loadingState: boolean;
   formData: any;
-  setFormData: any;
+  setFormData?: (data: any) => void;
 }
 
 const FormBuilder: React.FC<FormBuilderProps> = ({
@@ -58,9 +58,11 @@ const FormBuilder: React.FC<FormBuilderProps> = ({
   });
 
   React.useEffect(() => {
-    const subscription = watch((value) => setFormData(value));
-    return () => subscription.unsubscribe();
-  }, [watch]);
+    if (setFormData) {
+      const subscription = watch((value) => setFormData(value));
+      return () => subscription.unsubscribe();
+    }
+  }, [watch, setFormData]);
 
   const handleFormSubmit = async (data: any) => {
     try {
