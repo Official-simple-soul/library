@@ -1,39 +1,92 @@
-Table component.
+## TableWidget Component
 
-The component requires a column data, a data for the row and a click function
+The `TableWidget` component provides a dynamic and customizable data table using Material-UI and the DataGrid from `@mui/x-data-grid`. It supports features like pagination, search, menu actions, and more.
 
-column data should come in this format
+### Props
+
+| Prop                        | Type                                               | Description                                               |
+| --------------------------- | -------------------------------------------------- | --------------------------------------------------------- |
+| `rows`                      | `any[]`                                            | Array of row data to be displayed in the table.           |
+| `columns`                   | `GridColDef[]`                                     | Array of column configurations for the table.             |
+| `pageSize`                  | `number`                                           | Number of rows per page. Default is 5.                    |
+| `onRowClick`                | `(params: any) => void`                            | Callback function when a row is clicked.                  |
+| `onRowSelectionModelChange` | `(newSelection: any) => void`                      | Callback function when the row selection model changes.   |
+| `pageSizeOptions`           | `number[]`                                         | Array of options for page size. Default is `[5, 10, 20]`. |
+| `loading`                   | `boolean`                                          | Indicates if the table is loading.                        |
+| `menuItems`                 | `MenuActionItem[]`                                 | Array of menu items for row actions.                      |
+| `handleMenuClick`           | `(item: MenuActionItem, selectedRow: any) => void` | Callback function when a menu item is clicked.            |
+| `styles`                    | `StyleProps`                                       | Custom styles for the table header and main body.         |
+| `tableTitle`                | `string`                                           | Title of the table displayed above the search bar.        |
+| `enableSearch`              | `boolean`                                          | Flag to enable or disable the search bar.                 |
+
+### MenuActionItem Interface
+
+Each object in the `menuItems` array should conform to the following interface:
+
+| Property | Type     | Description                          |
+| -------- | -------- | ------------------------------------ |
+| `key`    | `string` | Unique identifier for the menu item. |
+| `label`  | `string` | Text to display for the menu item.   |
+
+### StyleProps Interface
+
+The `styles` prop should conform to the following interface:
+
+| Property       | Type      | Description                            |
+| -------------- | --------- | -------------------------------------- |
+| `headerStyles` | `SxProps` | Custom styles for the table header.    |
+| `mainStyles`   | `SxProps` | Custom styles for the main table body. |
+
+### Usage
+
+Integrate the `TableWidget` into your React application like so:
+
+```jsx
+import React from 'react';
+import TableWidget from './TableWidget';
 
 const columns = [
-{ header: "Stage", accessor: "stage_id" },
-{ header: "Task", accessor: "title" },
-{ header: "Track", accessor: "track_id" },
-{ header: "Due Date", accessor: "due_date" },
-{ header: "Status", accessor: "status" },
-{ header: "Points", accessor: "points" },
+  { field: 'id', headerName: 'ID', width: 90 },
+  { field: 'firstName', headerName: 'First name', width: 150 },
+  { field: 'lastName', headerName: 'Last name', width: 150 },
+  { field: 'age', headerName: 'Age', type: 'number', width: 110 },
 ];
 
-header is the display text for the table header while accessor is the key to access the data that belongs to the header. The access is gotten from the keys of the data. See below for clearance
-
-data should have the following structure.
-
-const data = [
-{
-stage_id: "10",
-title: "Task",
-track_id: "10",
-due_date: "26/17/2202",
-status: "Completed",
-points: "10",
-},
-{
-stage_id: "4",
-title: "LMS",
-track_id: "4",
-due_date: "26/17/2202",
-status: "Completed",
-points: "100",
-},
+const rows = [
+  { id: 1, firstName: 'John', lastName: 'Doe', age: 25 },
+  { id: 2, firstName: 'Jane', lastName: 'Doe', age: 30 },
 ];
 
-Note, this keys and value can be decided and be changed however you want
+const menuItems = [
+  { key: 'edit', label: 'Edit' },
+  { key: 'delete', label: 'Delete' },
+];
+
+const handleMenuClick = (item, selectedRow) => {
+  console.log(item, selectedRow);
+};
+
+function App() {
+  return (
+    <TableWidget
+      rows={rows}
+      columns={columns}
+      pageSize={5}
+      onRowClick={(params) => console.log(params)}
+      onRowSelectionModelChange={(newSelection) => console.log(newSelection)}
+      pageSizeOptions={[5, 10, 20]}
+      loading={false}
+      menuItems={menuItems}
+      handleMenuClick={handleMenuClick}
+      styles={{
+        headerStyles: { backgroundColor: '#f5f5f5' },
+        mainStyles: { backgroundColor: '#fff' },
+      }}
+      tableTitle="Sample Table"
+      enableSearch={true}
+    />
+  );
+}
+
+export default App;
+```

@@ -1,82 +1,58 @@
-import { render } from "@testing-library/react";
-import { Table } from "../components";
+import { render } from '@testing-library/react';
+import { TableWidget } from '../components';
+import { columns, rows } from './fixtures/useTableForm';
 
 export {};
 
-test("renders learn react link", () => {
+test('renders learn react link', () => {
   render(
-    <Table
+    <TableWidget
+      rows={rows}
       columns={columns}
-      data={data}
-      menuOption={menuOption}
+      onRowClick={onRowClick}
+      onRowSelectionModelChange={onRowSelectionModelChange}
+      pageSize={10}
+      pageSizeOptions={[10, 20]}
+      menuItems={menuItems}
+      handleMenuClick={handleMenuClick}
+      tableTitle={'Stundet List'}
+      enableSearch={true}
       styles={{
-        bg_color: "bg-green-100",
-        text_color: "",
-        menu_bg_color: "",
-        border: true,
+        headerStyles: {
+          backgroundColor: 'red',
+          color: '#fff',
+        },
+        bodyStyles: {
+          backgroundColor: '#fff',
+          color: 'red',
+          cursor: 'pointer',
+        },
       }}
-      onRowClick={handleClick}
     />
   );
 });
 
-const columns = [
-  { header: "Stage", accessor: "stage_id", sort: true },
-  { header: "Task", accessor: "title", sort: true },
-  { header: "Track", accessor: "track_id" },
-  { header: "Due Date", accessor: "due_date" },
-  { header: "Status", accessor: "status" },
-  { header: "Points", accessor: "points" },
-];
+const onRowClick = (param) => {
+  console.log('object:', param);
+};
 
-const data = [
+const onRowSelectionModelChange = (param) => {
+  console.log('checked', param);
+};
+
+const menuItems = [
   {
-    stage_id: 10,
-    title: "Task",
-    track_id: "10",
-    due_date: "26/17/2202",
-    status: "Completed",
-    points: "10",
+    key: 'edit',
+    label: 'Edit',
+    // onClick: (row: any) => handleMenuAction('Edit', row),
   },
   {
-    stage_id: 4,
-    title: "LMS",
-    track_id: "4",
-    due_date: "26/17/2202",
-    status: "Completed",
-    points: "100",
-  },
-  {
-    stage_id: 5,
-    title: "LMS",
-    track_id: "4",
-    due_date: "26/17/2202",
-    status: "Completed",
-    points: "100",
-  },
-  {
-    stage_id: 6,
-    title: "LMS",
-    track_id: "4",
-    due_date: "26/17/2202",
-    status: "Completed",
-    points: "100",
+    key: 'del',
+    label: 'Delete',
+    // onClick: (row: any) => handleMenuAction('Delete', row),
   },
 ];
 
-const menuOption = [
-  {
-    title: "Edit",
-    key: "edit",
-    id: 0,
-  },
-  {
-    title: "Delete",
-    key: "delete",
-    id: 1,
-  },
-];
-
-const handleClick = (data: any) => {
-  // console.log(data);
+const handleMenuClick = (item, row) => {
+  console.log(item, row);
 };

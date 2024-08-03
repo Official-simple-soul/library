@@ -1,9 +1,10 @@
 {
   "name": "@msflib/react",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "dependencies": {
     "@mui/lab": "^5.0.0-alpha.170",
+    "@mui/x-data-grid": "^7.11.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -55,11 +56,11 @@
     "@types/react-dom": "^18.2.15",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.51.2",
     "rollup": "^4.5.0",
     "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "tailwindcss": "^3.3.5",
-    "react-hook-form": "^7.51.2"
+    "tailwindcss": "^3.3.5"
   },
   "peerDependencies": {
     "@types/react": "^18.2.37",
