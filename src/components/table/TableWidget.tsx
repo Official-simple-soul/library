@@ -4,9 +4,8 @@ import { DataGrid } from '@mui/x-data-grid';
 import MenuActions from './MenuAction';
 import SearchArea from './SearchArea';
 import { actionColumn, processedColumns } from './RenderCells';
-import { TableWidgetProps } from './types';
 
-const TableWidget: React.FC<TableWidgetProps> = ({
+const TableWidget = ({
   rows,
   columns,
   pageSize = 5,
@@ -21,12 +20,13 @@ const TableWidget: React.FC<TableWidgetProps> = ({
   enableSearch,
   menuItem,
   checkboxSelection = true,
+  autoHeight = false,
 }) => {
   const [menuAnchorEl, setMenuAnchorEl] = useState(null);
   const [selectedRow, setSelectedRow] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const handleMenuOpen = (event: any, row: any) => {
+  const handleMenuOpen = (event, row) => {
     event.stopPropagation();
     setMenuAnchorEl(event.currentTarget);
     setSelectedRow(row);
@@ -37,11 +37,11 @@ const TableWidget: React.FC<TableWidgetProps> = ({
     setSelectedRow(null);
   };
 
-  const handleSearchChange = (event: any) => {
+  const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
-  const filteredRows = rows.filter((row: any) =>
+  const filteredRows = rows.filter((row) =>
     Object.values(row).some((value) =>
       value?.toString().toLowerCase().includes(searchQuery.toLowerCase())
     )
@@ -52,7 +52,7 @@ const TableWidget: React.FC<TableWidgetProps> = ({
     : processedColumns(columns);
 
   return (
-    <Box sx={{ paddingY: 4 }}>
+    <Box sx={{ paddingY: 2 }}>
       <SearchArea
         enableSearch={enableSearch}
         handleSearchChange={handleSearchChange}
@@ -69,6 +69,7 @@ const TableWidget: React.FC<TableWidgetProps> = ({
             },
           },
         }}
+        autoHeight={autoHeight}
         pageSizeOptions={pageSizeOptions}
         checkboxSelection={checkboxSelection}
         disableRowSelectionOnClick
@@ -76,12 +77,25 @@ const TableWidget: React.FC<TableWidgetProps> = ({
         onRowSelectionModelChange={onRowSelectionModelChange}
         loading={loading}
         sx={{
-          '& .MuiDataGrid-columnHeader': {
-            ...styles?.headerStyles,
-          },
           '& .MuiDataGrid-main': {
-            ...styles?.bodyStyles,
+            ...styles?.body,
           },
+          '& .MuiDataGrid-cell': {
+            ...styles?.cell,
+          },
+          '& .MuiDataGrid-row': {
+            ...styles?.row,
+          },
+          '& .MuiDataGrid-cell:focus': {
+            outline: 'none',
+          },
+          '& .MuiDataGrid-cell:focus-within': {
+            outline: 'none',
+          },
+          '& .MuiDataGrid-columnHeaders': {
+            ...styles.header,
+          },
+          ...styles.root,
         }}
       />
       <MenuActions

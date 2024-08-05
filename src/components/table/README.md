@@ -18,6 +18,7 @@ The `TableWidget` component provides a dynamic and customizable data table using
 | `styles`                    | `StyleProps`                                       | Custom styles for the table header and main body.         |
 | `tableTitle`                | `string`                                           | Title of the table displayed above the search bar.        |
 | `enableSearch`              | `boolean`                                          | Flag to enable or disable the search bar.                 |
+| `autoHeight`                | `boolean`                                          | Flag to enable or disable the auto height.                |
 
 ### MenuActionItem Interface
 
@@ -32,10 +33,13 @@ Each object in the `menuItems` array should conform to the following interface:
 
 The `styles` prop should conform to the following interface:
 
-| Property       | Type      | Description                            |
-| -------------- | --------- | -------------------------------------- |
-| `headerStyles` | `SxProps` | Custom styles for the table header.    |
-| `mainStyles`   | `SxProps` | Custom styles for the main table body. |
+| Property | Type      | Description                            |
+| -------- | --------- | -------------------------------------- |
+| `header` | `SxProps` | Custom styles for the table header.    |
+| `row`    | `SxProps` | Custom styles for the row header.      |
+| `body`   | `SxProps` | Custom styles for the body table body. |
+| `cell`   | `SxProps` | Custom styles for the cell table body. |
+| `root`   | `SxProps` | Custom styles for the root table body. |
 
 ### Usage
 
