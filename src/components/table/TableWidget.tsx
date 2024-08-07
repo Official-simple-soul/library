@@ -93,7 +93,13 @@ const TableWidget = ({
             outline: 'none',
           },
           '& .MuiDataGrid-columnHeaders': {
+            ...styles.headers,
+          },
+          '& .MuiDataGrid-columnHeader': {
             ...styles.header,
+          },
+          '& .MuiDataGrid-row:hover': {
+            ...styles.rowHover,
           },
           ...styles.root,
         }}
