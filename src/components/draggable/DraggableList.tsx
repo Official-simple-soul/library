@@ -1,5 +1,12 @@
 import React from 'react';
-import { DndContext, closestCenter, DragEndEvent } from '@dnd-kit/core';
+import {
+  DndContext,
+  closestCenter,
+  useSensor,
+  useSensors,
+  PointerSensor,
+  DragEndEvent,
+} from '@dnd-kit/core';
 import {
   arrayMove,
   SortableContext,
@@ -56,6 +63,14 @@ const DraggableList = <T extends { id: string }>({
   renderItem,
   itemClassName,
 }: DraggableListProps<T>) => {
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        delay: 250, // 250ms delay before drag starts
+      },
+    })
+  );
+
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
 
@@ -69,7 +84,11 @@ const DraggableList = <T extends { id: string }>({
   };
 
   return (
-    <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+    <DndContext
+      sensors={sensors}
+      collisionDetection={closestCenter}
+      onDragEnd={handleDragEnd}
+    >
       <SortableContext
         items={items.map((item) => item.id)}
         strategy={verticalListSortingStrategy}
