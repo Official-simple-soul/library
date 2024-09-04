@@ -93,7 +93,7 @@ const DraggableList = <T extends { id: string }>({
         items={items.map((item) => item.id)}
         strategy={verticalListSortingStrategy}
       >
-        <div className="p-4 list-decimal">
+        <div className="list-decimal">
           {items.map((item) => (
             <SortableItem key={item.id} id={item.id} className={itemClassName}>
               {renderItem(item)}
