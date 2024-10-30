@@ -1,6 +1,6 @@
 {
-  "name": "@msflib/react",
-  "version": "0.0.7",
+  "name": "@official-simple-soul/library",
+  "version": "0.0.1",
   "private": false,
   "dependencies": {
     "@dnd-kit/core": "^6.1.0",

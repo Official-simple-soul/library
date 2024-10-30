@@ -1,1 +1,1 @@
-# MSF React lib
+# React lib
